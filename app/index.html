@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller='main-controller'>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Task list</title>
+    <script src="js/libs/angular.js"></script>
+    <script src="js/libs/jquery.js"></script>
+    <script src="js/scripts/services/tasks-back.js"></script>
+    <script src="js/scripts/app.js"></script>
+    <script src="js/scripts/entities/Task.js"></script>
+    <script src="js/scripts/entities/TaskList.js"></script>
+    <script src="js/scripts/entities/User.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+</head>
+<body>
+<div>
+    <p>Tasks<br>
+        <textarea id="description" cols="40" rows="3" ng-model="description"></textarea>
+    </p>
+
+    <p>
+        <input id="createButton" type="button" value="Create" ng-click="addTask()">
+    </p>
+</div>
+
+<div class="Task" ng-repeat="task in tasks" ng-mouseover="setEditableTask(task.id)"
+     ng-mouseleave="setEditableTask(null)">
+    <div ng-show="editableTaskId != task.id">{{task.title}}</div>
+    <textarea ng-show="editableTaskId == task.id"
+              ng-focus="setFocus(task.id)"
+              ng-blur="setFocus(null)">{{task.title}}</textarea>
+
+    <div class="Date">{{task.date}}</div>
+    <div class="TaskActions" ng-show="editableTaskId == task.id">
+        <input type="button" value="Complete" ng-click="completeTask(task.id)">
+        <input type="button" value="Reopen" ng-click="reopenTask(task.id)">
+        <input type="button" value="Save" ng-click="editTask(task.id)">
+        <input type="button" value="Delete" ng-click="deleteTask(task.id)">
+    </div>
+</div>
+</body>
+</html>
