@@ -1,38 +1,23 @@
 <!DOCTYPE html>
-<html ng-app="app" ng-controller='main-controller'>
+<html ng-app="app">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Task list</title>
     <script src="js/libs/angular.js"></script>
-    <script src="js/libs/jquery.js"></script>
+    <script src="js/libs/angular-ui-router.js"></script>
+
     <script src="js/scripts/services/tasks-back.js"></script>
+    <script src="js/scripts/controllers/tasks-front.js"></script>
     <script src="js/scripts/app.js"></script>
     <script src="js/scripts/entities/Task.js"></script>
     <script src="js/scripts/entities/TaskList.js"></script>
     <script src="js/scripts/entities/User.js"></script>
+
     <link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 <body>
-<div>
-    <p>Tasks<br>
-        <textarea id="description" cols="40" rows="3" ng-model="description"></textarea>
-    </p>
 
-    <p>
-        <input id="createButton" type="button" value="Create" ng-click="addTask()">
-    </p>
-</div>
+<div ui-view></div>
 
-<div id="{{'taskId_'+task.id}}" class="taskContainer" ng-repeat="task in tasks">
-    <div class="taskTextView" style="display: block;">{{task.title}}</div>
-    <textarea class="taskEditText" style="display: none;">{{task.title}}</textarea>
-
-    <div class="date">{{task.date}}</div>
-    <div class="taskActions" style="display: none;">
-        <input class="complete" type="button" value="Complete">
-        <input class="reopen" type="button" value="Reopen" style="display: none;">
-        <input class="save" type="button" value="Save"><input class="delete" type="button" value="Delete">
-    </div>
-</div>
 </body>
 </html>
