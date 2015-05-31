@@ -1,17 +1,17 @@
-<div class="TaskList" ng-controller="listItemController">
+<div class="taskList" ng-controller="listItemController">
 
     <div>Tasks for {{taskOwner}}<br>
         <a href="#/all">all</a>,
         <a href="#/my">my</a>
     </div>
     <div ng-show="tasks.length == 0">Not tasks yet!</div>
-    <div class="Task" ng-repeat="task in tasks | filter: owner"
+    <div class="task" ng-repeat="task in tasks | filter: owner"
          ng-mouseover="setEditableTask(task.id)"
          ng-mouseleave="setEditableTask(null)">
         <br>
 
         <div ng-show="editableTaskId != task.id || task.isComplete"
-             ng-class="{true: 'CompletedTask', false: ''}[task.isComplete]">
+             ng-class="{true: 'completedTask', false: ''}[task.isComplete]">
             {{task.title}}
         </div>
 
@@ -29,8 +29,8 @@
                placeholder="Assign to"
                ng-show="editableTaskId == task.id && !task.isComplete">
 
-        <div class="Date">{{task.date | dateFilter}}</div>
-        <div class="TaskActions" ng-show="editableTaskId == task.id">
+        <div class="date">{{task.date | dateFilter}}</div>
+        <div class="taskActions" ng-show="editableTaskId == task.id">
             <input type="button" value="Complete" ng-show="!task.isComplete" ng-click="completeTask(task.id)">
             <input type="button" value="Reopen" ng-show="task.isComplete" ng-click="reopenTask(task.id)">
             <input type="button" value="Save" ng-click="editTask(task.id, task.newTitle, task.newAssignee)">

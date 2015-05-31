@@ -1,4 +1,8 @@
-angular.module('app', ['ui.router', 'tasks-back', 'tasks-front'])
+angular.module('app', [
+    'ui.router',
+    'formatters',
+    'tasks-front'
+])
     .config(function ($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.otherwise("/");
@@ -16,9 +20,5 @@ angular.module('app', ['ui.router', 'tasks-back', 'tasks-front'])
                 url: "all",
                 templateUrl: "views/task-list.html"
             })
-    })
-    .filter('dateFilter', function ($filter) {
-        return function (date) {
-            return $filter('date')(date, 'MMM dd yyyy');
-        };
     });
+
