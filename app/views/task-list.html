@@ -10,8 +10,8 @@
          ng-mouseleave="setEditableTask(null)">
         <br>
 
-        <div ng-show="editableTaskId != task.id || task.isComplete"
-             ng-class="{true: 'completedTask', false: ''}[task.isComplete]">
+        <div ng-show="editableTaskId != task.id || task.completed"
+             ng-class="{true: 'completedTask', false: ''}[task.completed]">
             {{task.title}}
         </div>
 
@@ -19,7 +19,7 @@
 
         <textarea ng-model="task.newTitle"
                   ng-init="task.newTitle = task.title"
-                  ng-show="editableTaskId == task.id && !task.isComplete"
+                  ng-show="editableTaskId == task.id && !task.completed"
                   ng-focus="setFocus(task.id)"
                   ng-blur="setFocus(null)"></textarea>
 
@@ -27,12 +27,12 @@
                ng-model="task.newAssignee"
                ng-init="task.newAssignee = task.assignee.name"
                placeholder="Assign to"
-               ng-show="editableTaskId == task.id && !task.isComplete">
+               ng-show="editableTaskId == task.id && !task.completed">
 
         <div class="date">{{task.date | dateFilter}}</div>
         <div class="taskActions" ng-show="editableTaskId == task.id">
-            <input type="button" value="Complete" ng-show="!task.isComplete" ng-click="completeTask(task.id)">
-            <input type="button" value="Reopen" ng-show="task.isComplete" ng-click="reopenTask(task.id)">
+            <input type="button" value="Complete" ng-show="!task.completed" ng-click="completeTask(task.id)">
+            <input type="button" value="Reopen" ng-show="task.completed" ng-click="reopenTask(task.id)">
             <input type="button" value="Save" ng-click="editTask(task.id, task.newTitle, task.newAssignee)">
             <input type="button" value="Delete" ng-click="deleteTask(task.id)">
         </div>

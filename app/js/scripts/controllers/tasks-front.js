@@ -3,6 +3,7 @@ angular.module('tasks-front', ['tasks-back'])
 
         $scope.editableTaskId = null;
         $scope.focused = false;
+        $scope.file = null;
         $scope.assignee = Widget.user.toJSON().name;
         $scope.taskOwner = Widget.user.toJSON().name;
         $scope.tasks = Widget.taskList.toJSON();
@@ -12,6 +13,17 @@ angular.module('tasks-front', ['tasks-back'])
             Widget.taskList.printToLog();
             $scope.tasks = Widget.taskList.toJSON();
             $scope.description = "";
+        };
+
+        $scope.uploadFromFile = function () {
+            $.work({file: 'js/scripts/todofile-worker.js', args: {message: $scope.file}}).then(function (data) {
+                Widget.taskList = TaskList.fromJSON(data);
+                setTimeout(function () {
+                    $scope.tasks = Widget.taskList.toJSON();
+                }, 0);
+            }).fail(function (data) {
+                console.log(data);
+            });
         };
 
         $scope.editTask = function (taskId, title, assignee) {
@@ -88,4 +100,21 @@ angular.module('tasks-front', ['tasks-back'])
                 });
             }
         };
-    });
+    }).directive("fileread", [function () {
+        return {
+            scope: {
+                fileread: "="
+            },
+            link: function (scope, element, attributes) {
+                element.bind("change", function (changeEvent) {
+                    var reader = new FileReader();
+                    reader.onload = function (loadEvent) {
+                        scope.$apply(function () {
+                            scope.fileread = loadEvent.target.result;
+                        });
+                    };
+                    reader.readAsText(changeEvent.target.files[0]);
+                });
+            }
+        }
+    }]);

@@ -2,6 +2,10 @@
     text-decoration: line-through;
 }
 
+.uploadPanel {
+    float: right;
+}
+
 .ng-invalid-name-length {
-    border:1px solid Red;
+    border: 1px solid Red;
 }
