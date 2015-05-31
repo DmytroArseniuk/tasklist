@@ -1,0 +1,15 @@
+<div ng-controller="widgetController">
+    <form name="taskForm" ng-submit="addTask()">
+        Tasks<br>
+        <textarea required cols="40" rows="3" ng-model="description" name="description"
+                  placeholder="Task description"></textarea>
+        </br>
+        <input type="text" name-length="assignee" name="assignee" ng-model='assignee' placeholder="Assign to">
+        </br>
+        <input type="submit" value="Create"
+               ng-disabled="taskForm.description.$invalid || taskForm.assignee.$error.nameLength">
+        {{taskForm.assignee.nameLength}}
+
+    </form>
+    <div ui-view></div>
+</div>

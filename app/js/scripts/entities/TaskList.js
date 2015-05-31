@@ -8,12 +8,11 @@ TaskList.prototype.add = function (title, owner, assignee) {
     var task = new Task(id, new Date(), title, owner, assignee, false);
     this._taskList.push(task);
     return task;
-
 };
 
 TaskList.prototype.update = function (task) {
     for (var i = 0; i < this._taskList.length; i++) {
-        if (this._taskList[i].toJSON().id == task.toJSON().id()) {
+        if (this._taskList[i].toJSON().id == task.toJSON().id) {
             this._taskList[i] = task;
             return;
         }
@@ -26,6 +25,15 @@ TaskList.prototype.remove = function (id) {
         if (task.toJSON().id == id) {
             task = null;
             this._taskList.splice(i, 1);
+        }
+    }
+};
+
+TaskList.prototype.find = function (id) {
+    for (var i = 0; i < this._taskList.length; i++) {
+        var task = this._taskList[i];
+        if (task.toJSON().id == id) {
+            return task;
         }
     }
 };

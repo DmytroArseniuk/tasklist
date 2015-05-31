@@ -1,3 +1,7 @@
 .CompletedTask {
     text-decoration: line-through;
 }
+
+.ng-invalid-name-length {
+    border:1px solid Red;
+}
