@@ -1,7 +1,7 @@
-function Task(id, date, title, owner, assignee, isComplete) {
+function Task(id, date, title, owner, assignee, completed) {
     this._title = title;
     this._date = date;
-    this._completed = isComplete;
+    this._completed = completed;
     this._assignee = assignee;
     this._owner = owner;
     this._id = id;

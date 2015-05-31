@@ -12,8 +12,8 @@ self.addEventListener('message', function (e) {
         var title = fields[3];
         var owner = new User(fields[1]);
         var assignee = new User(fields[2]);
-        var isComplete = fields[5] == 'true';
-        taskList.push(new Task(id, date, title, owner, assignee, isComplete));
+        var completed = fields[5] == 'true';
+        taskList.push(new Task(id, date, title, owner, assignee, completed));
     }
     taskList = new TaskList(taskList);
     self.postMessage(taskList.toJSON());
