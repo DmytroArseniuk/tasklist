@@ -22,3 +22,21 @@ angular.module('app', [
             })
     });
 
+$.work = function (args) {
+    var def = $.Deferred(function (dfd) {
+        var worker;
+        if (window.Worker) {
+            var worker = new Worker(args.file);
+            worker.onmessage = function (event) {
+                dfd.resolve(event.data);
+            };
+            worker.onerror = function (event) {
+                dfd.reject(event);
+            };
+            worker.postMessage(args.args);
+        } else {
+            alert("Web workers not supported.");
+        }
+    });
+    return def.promise();
+};

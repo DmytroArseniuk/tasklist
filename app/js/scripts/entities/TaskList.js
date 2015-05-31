@@ -1,6 +1,10 @@
-function TaskList(taskList) {
+function TaskList(taskList, startId) {
     this._taskList = taskList;
-    this._idCounter = 0;
+    if (startId) {
+        this._idCounter = startId;
+    } else {
+        this._idCounter = 0;
+    }
 }
 
 TaskList.prototype.add = function (title, owner, assignee) {
@@ -68,6 +72,20 @@ TaskList.prototype.toJSON = function () {
     }
     return list;
 };
+
+TaskList.fromJSON = function (json) {
+    var maxId = 0;
+    var list = [];
+    for (var i = 0; i < json.length; i++) {
+        var task = Task.fromJSON(json[i]);
+        list.push(task);
+        if (maxId < task._id) {
+            maxId = task._id;
+        }
+    }
+    return new TaskList(list, maxId + 1);
+};
+
 
 
 

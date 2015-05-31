@@ -7,3 +7,7 @@ User.prototype.toJSON = function () {
         name: this._name
     };
 };
+
+User.fromJSON = function (json) {
+    return new User(json.name);
+};

@@ -9,7 +9,14 @@
         <input type="submit" value="Create"
                ng-disabled="taskForm.description.$invalid || taskForm.assignee.$error.nameLength">
         {{taskForm.assignee.nameLength}}
-
     </form>
+    <div class="uploadPanel">
+        Upload TODO app file in *.csv
+        <form name="fileUploader" ng-submit="uploadFromFile()">
+            <input type="file" fileread="file" accept=".csv">
+            <input value="Upload" type="submit">
+        </form>
+    </div>
+
     <div ui-view></div>
 </div>
